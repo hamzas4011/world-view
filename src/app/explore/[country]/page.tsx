@@ -19,18 +19,18 @@ type CountryData = {
   timezones: string[]
 }
 
-export default async function Page(props: Promise<{ params: { country: string } }>) {
-  const { params } = await props;
-  return await AsyncCountryContent({ country: params.country });
-}
+export default async function Page({ params }: { params: { country: string } }) {
+  const { country } = params // ✅ Destructure to avoid warning
 
-async function AsyncCountryContent({ country }: { country: string }) {
   const res = await fetch(
     `https://restcountries.com/v3.1/name/${encodeURIComponent(country)}?fullText=true`,
     { cache: 'no-store' }
   )
 
-  if (!res.ok) return notFound()
+  if (!res.ok) {
+    console.error(`Failed to fetch data for: ${country}`)
+    return notFound()
+  }
 
   const data: CountryData[] = await res.json()
   const countryData = data[0]
