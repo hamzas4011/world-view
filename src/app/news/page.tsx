@@ -21,7 +21,7 @@ const mockArticles: Article[] = [
   {
     title: 'AI Becomes Tech Minister',
     pubDate: '2025-04-20T12:15:00Z',
-    image: '/images/ai-tech.jpg',
+    image: '/images/ai.jpg',
   },
   {
     title: 'Underwater Cities Announced',
@@ -36,7 +36,7 @@ const mockArticles: Article[] = [
   {
     title: 'UN Recognizes Island Nation',
     pubDate: '2025-04-21T17:45:00Z',
-    image: '/images/un-nation.jpg',
+    image: '/images/un.jpg',
   },
   {
     title: 'Moon Internet Now Live',
