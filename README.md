@@ -1,26 +1,21 @@
 # 🌍 WorldView App
 
-**WorldView** is a fullstack web application where users can explore countries from around the world — including their flags, capitals, populations, timezones, and more.
+**WorldView** is a fullstack web application built with **Next.js (App Router)**, **TypeScript**, and **Tailwind CSS**. It allows users to explore countries around the world and view real-time global news. The app is responsive, accessible, and designed with universal design principles.
 
-It also features a global news page powered by public RSS feeds, making the experience both informative and interactive.
+![screencapture-world-view-seven-vercel-app-explore-norway-2025-06-01-21_38_18](https://github.com/user-attachments/assets/75095486-f2de-42bf-aca9-bdfdb786e5c2)
 
 ---
 
 ## ✨ Features
 
-- 🗺️ **Explore** 250+ countries with key facts
-- 🔍 **Search** by name in real-time
-- 🏳️ **Country Detail Pages** with flag, population, region, languages, and area
-- 📰 **World News Feed** with dynamic article cards
-- ♿ Built with **universal design** principles (accessible & responsive)
+- 🗺️ Explore detailed info on 250+ countries
+- 🔍 Real-time search by country name
+- 🏳️ Individual country pages with flag, population, languages, and more
+- 📰 Global news feed
+- ♿ Accessible and responsive layout
 
 ---
 
-## ⚙️ Tech Stack
+## 🔗 Live Demo
 
-- Next.js (Fullstack)
-- TypeScript
-- Tailwind CSS
-- REST Countries API
-- RSS Parser for news
-- Lorem Picsum and Unsplash for placeholder images
+🌐 [https://world-view-seven.vercel.app/](https://world-view-seven.vercel.app/)
