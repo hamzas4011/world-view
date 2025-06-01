@@ -70,7 +70,11 @@ const Navbar = () => {
           } md:flex md:items-center md:space-x-6 space-y-2 md:space-y-0 mt-4 md:mt-0 bg-gray-800 md:bg-transparent absolute md:static left-0 right-0 top-16 md:top-auto z-50 p-4 md:p-0`}
         >
           {links.map(({ href, label }) => {
-            const isActive = pathname === href || pathname.startsWith(`${href}/`)
+            const isActive =
+              href === '/'
+                ? pathname === '/'
+                : pathname === href || pathname.startsWith(`${href}/`)
+
             return (
               <li key={href}>
                 <Link
