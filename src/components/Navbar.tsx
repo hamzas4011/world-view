@@ -73,14 +73,16 @@ const Navbar = () => {
             const isActive =
               href === '/'
                 ? pathname === '/'
-                : pathname === href || pathname.startsWith(`${href}/`)
+                : pathname.startsWith(href)
 
             return (
               <li key={href}>
                 <Link
                   href={href}
                   className={`block px-2 py-2 rounded focus:outline-none focus:bg-gray-700 ${
-                    isActive ? 'bg-gray-700 text-white' : 'hover:text-gray-300'
+                    isActive
+                      ? 'bg-gray-700 text-white'
+                      : 'text-white hover:text-gray-300'
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
