@@ -47,6 +47,7 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-800 text-white" role="navigation" aria-label="Main navigation">
       <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+        {/* Logo */}
         <Link
           href="/"
           className="text-2xl font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
@@ -54,6 +55,7 @@ const Navbar = () => {
           WorldView
         </Link>
 
+        {/* Mobile Menu Button */}
         <button
           ref={buttonRef}
           type="button"
@@ -65,12 +67,13 @@ const Navbar = () => {
           {isOpen ? '✕' : '☰'}
         </button>
 
+        {/* Navigation Links */}
         <ul
           ref={menuRef}
           id="main-menu"
           className={`${
             isOpen ? 'block' : 'hidden'
-          } md:flex md:items-center md:space-x-6 space-y-2 md:space-y-0 mt-2 md:mt-0 bg-gray-800 md:bg-transparent absolute md:static left-0 right-0 top-full z-50 p-4 md:p-0`}
+          } md:flex md:items-center md:space-x-6 space-y-2 md:space-y-0 mt-4 md:mt-0 bg-gray-800 md:bg-transparent absolute md:static left-0 right-0 top-0 md:top-auto z-50 p-4 md:p-0`}
         >
           {links.map(({ href, label }) => {
             const isActive =
