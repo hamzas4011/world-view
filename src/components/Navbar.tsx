@@ -70,9 +70,11 @@ const Navbar = () => {
           } md:flex md:items-center md:space-x-6 space-y-2 md:space-y-0 mt-4 md:mt-0 bg-gray-800 md:bg-transparent absolute md:static left-0 right-0 top-16 md:top-auto z-50 p-4 md:p-0`}
         >
           {links.map(({ href, label }) => {
-            // Only mark Home as active on root, others on exact or subpath
+            // Home is only active on root, others on exact or subpath
             const isActive =
-              pathname === href || (href !== '/' && pathname.startsWith(href + '/'))
+              href === '/'
+                ? pathname === '/'
+                : pathname === href || pathname.startsWith(href + '/')
 
             return (
               <li key={href}>
