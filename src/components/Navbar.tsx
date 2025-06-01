@@ -73,7 +73,7 @@ const Navbar = () => {
             const isActive =
               href === '/'
                 ? pathname === '/'
-                : pathname.startsWith(href)
+                : pathname === href || pathname.startsWith(href + '/')
 
             return (
               <li key={href}>
