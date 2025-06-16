@@ -30,8 +30,21 @@ export default async function Page({ params }: { params: { country: string } }) 
     return notFound()
   }
 
-  const data: CountryData[] = await res.json()
-  const countryData = data[0]
+  let data: CountryData[] = []
+
+  try {
+    data = await res.json()
+  } catch (err) {
+    console.error('Failed to parse country data:', err)
+    return notFound()
+  }
+
+  const countryData = data?.[0]
+
+  if (!countryData) {
+    console.error(`No data found for: ${country}`)
+    return notFound()
+  }
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-12">
