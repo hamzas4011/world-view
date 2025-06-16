@@ -38,13 +38,13 @@ async function getCountryData(country: string): Promise<CountryData | null> {
   }
 }
 
-// ✅ FIXED for Next.js 15 — must be async and await params
-export default async function Page({ params }: { params: { country: string } }) {
-  const { country } = await params
+// ✅ Fixed: Awaited params for Next.js 15
+export default async function Page({ params }: Awaited<{ params: { country: string } }>) {
+  const { country } = params
   return <CountryPage country={country} />
 }
 
-// ✅ The component that renders the page UI
+// ✅ Async component to render country details
 async function CountryPage({ country }: { country: string }) {
   const countryData = await getCountryData(country)
 
