@@ -17,7 +17,7 @@ type CountryData = {
   timezones: string[]
 }
 
-// ✅ This function fetches the country data
+// ✅ Fetch country data
 async function getCountryData(country: string): Promise<CountryData | null> {
   try {
     const res = await fetch(
@@ -38,12 +38,13 @@ async function getCountryData(country: string): Promise<CountryData | null> {
   }
 }
 
-// ✅ Outer Page function (NOT async)
-export default function Page({ params }: { params: { country: string } }) {
-  return <CountryPage country={params.country} />
+// ✅ FIXED for Next.js 15 — must be async and await params
+export default async function Page({ params }: { params: { country: string } }) {
+  const { country } = await params
+  return <CountryPage country={country} />
 }
 
-// ✅ Async logic is handled here
+// ✅ The component that renders the page UI
 async function CountryPage({ country }: { country: string }) {
   const countryData = await getCountryData(country)
 
