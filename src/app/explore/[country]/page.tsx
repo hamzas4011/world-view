@@ -17,6 +17,7 @@ type CountryData = {
   timezones: string[]
 }
 
+// ✅ This function fetches the country data
 async function getCountryData(country: string): Promise<CountryData | null> {
   try {
     const res = await fetch(
@@ -37,10 +38,12 @@ async function getCountryData(country: string): Promise<CountryData | null> {
   }
 }
 
+// ✅ Outer Page function (NOT async)
 export default function Page({ params }: { params: { country: string } }) {
   return <CountryPage country={params.country} />
 }
 
+// ✅ Async logic is handled here
 async function CountryPage({ country }: { country: string }) {
   const countryData = await getCountryData(country)
 
