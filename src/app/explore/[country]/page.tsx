@@ -17,32 +17,34 @@ type CountryData = {
   timezones: string[]
 }
 
-export default async function Page({ params }: { params: { country: string } }) {
-  const { country } = params
-
-  const res = await fetch(
-    `https://restcountries.com/v3.1/name/${encodeURIComponent(country)}?fullText=true`,
-    { cache: 'no-store' }
-  )
-
-  if (!res.ok) {
-    console.error(`Failed to fetch data for: ${country}`)
-    return notFound()
-  }
-
-  let data: CountryData[] = []
-
+async function getCountryData(country: string): Promise<CountryData | null> {
   try {
-    data = await res.json()
-  } catch (err) {
-    console.error('Failed to parse country data:', err)
-    return notFound()
-  }
+    const res = await fetch(
+      `https://restcountries.com/v3.1/name/${encodeURIComponent(country)}?fullText=true`,
+      { cache: 'no-store' }
+    )
 
-  const countryData = data?.[0]
+    if (!res.ok) {
+      console.error('Failed to fetch country:', res.status)
+      return null
+    }
+
+    const data: CountryData[] = await res.json()
+    return data?.[0] || null
+  } catch (err) {
+    console.error('Fetch error:', err)
+    return null
+  }
+}
+
+export default function Page({ params }: { params: { country: string } }) {
+  return <CountryPage country={params.country} />
+}
+
+async function CountryPage({ country }: { country: string }) {
+  const countryData = await getCountryData(country)
 
   if (!countryData) {
-    console.error(`No country data found for: ${country}`)
     return notFound()
   }
 
