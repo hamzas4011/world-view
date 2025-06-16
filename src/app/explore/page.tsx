@@ -14,6 +14,7 @@ export default function ExplorePage() {
   const [countries, setCountries] = useState<Country[]>([])
   const [filtered, setFiltered] = useState<Country[]>([])
   const [searchTerm, setSearchTerm] = useState('')
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -21,22 +22,31 @@ export default function ExplorePage() {
         const res = await fetch('/api/countries')
         const data = await res.json()
 
-        // ✅ Sort alphabetically by common name
+        if (!res.ok) {
+          setError(data.error || 'Failed to fetch countries')
+          return
+        }
+
+        if (!Array.isArray(data)) {
+          setError('Unexpected response format')
+          return
+        }
+
         const sortedData = data.sort((a: Country, b: Country) =>
           a.name.common.localeCompare(b.name.common)
         )
 
         setCountries(sortedData)
-        setFiltered(sortedData) // Initially show all
+        setFiltered(sortedData)
       } catch (err) {
         console.error('Error fetching countries:', err)
+        setError('Something went wrong while fetching countries.')
       }
     }
 
     fetchCountries()
   }, [])
 
-  // Handle live search
   useEffect(() => {
     const filteredData = countries.filter((country) =>
       country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
@@ -58,7 +68,9 @@ export default function ExplorePage() {
         />
       </div>
 
-      {filtered.length === 0 ? (
+      {error ? (
+        <p className="text-center text-red-600">{error}</p>
+      ) : filtered.length === 0 ? (
         <p className="text-center text-gray-500">No countries found.</p>
       ) : (
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">

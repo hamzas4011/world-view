@@ -2,9 +2,12 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
-    const res = await fetch('https://restcountries.com/v3.1/all')
+    const res = await fetch('https://restcountries.com/v3.1/all', {
+      cache: 'no-store',
+    })
 
     if (!res.ok) {
+      console.error('Failed to fetch from restcountries.com:', res.status)
       return NextResponse.json({ error: 'Failed to fetch countries' }, { status: 500 })
     }
 
