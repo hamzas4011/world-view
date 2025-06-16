@@ -17,40 +17,21 @@ type CountryData = {
   timezones: string[]
 }
 
-// ✅ Fetch country data
-async function getCountryData(country: string): Promise<CountryData | null> {
-  try {
-    const res = await fetch(
-      `https://restcountries.com/v3.1/name/${encodeURIComponent(country)}?fullText=true`,
-      { cache: 'no-store' }
-    )
+export default async function Page(props: { params: Promise<{ country: string }> }) {
+  const { country } = await props.params
 
-    if (!res.ok) {
-      console.error('Failed to fetch country:', res.status)
-      return null
-    }
+  const res = await fetch(
+    `https://restcountries.com/v3.1/name/${encodeURIComponent(country)}?fullText=true`,
+    { cache: 'no-store' }
+  )
 
-    const data: CountryData[] = await res.json()
-    return data?.[0] || null
-  } catch (err) {
-    console.error('Fetch error:', err)
-    return null
-  }
-}
-
-// ✅ Fixed: Awaited params for Next.js 15
-export default async function Page({ params }: Awaited<{ params: { country: string } }>) {
-  const { country } = params
-  return <CountryPage country={country} />
-}
-
-// ✅ Async component to render country details
-async function CountryPage({ country }: { country: string }) {
-  const countryData = await getCountryData(country)
-
-  if (!countryData) {
+  if (!res.ok) {
+    console.error(`Failed to fetch data for: ${country}`)
     return notFound()
   }
+
+  const data: CountryData[] = await res.json()
+  const countryData = data[0]
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-12">

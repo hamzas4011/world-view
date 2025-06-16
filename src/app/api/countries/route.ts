@@ -8,12 +8,11 @@ export async function GET() {
     )
 
     if (!res.ok) {
-      console.error('Failed to fetch from restcountries.com:', res.status)
+      console.error('Failed to fetch countries:', res.status)
       return NextResponse.json({ error: 'Failed to fetch countries' }, { status: 500 })
     }
 
     const countries = await res.json()
-
     return NextResponse.json(countries)
   } catch (error) {
     console.error('API error:', error)
