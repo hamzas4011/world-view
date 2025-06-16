@@ -17,8 +17,8 @@ type CountryData = {
   timezones: string[]
 }
 
-export default async function Page(props: { params: Promise<{ country: string }> }) {
-  const { country } = await props.params
+export default async function Page({ params }: { params: { country: string } }) {
+  const { country } = params
 
   const res = await fetch(
     `https://restcountries.com/v3.1/name/${encodeURIComponent(country)}?fullText=true`,

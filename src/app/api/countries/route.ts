@@ -1,4 +1,3 @@
-// File: src/app/api/countries/route.ts
 import { NextResponse } from 'next/server'
 
 export async function GET() {
@@ -6,7 +5,7 @@ export async function GET() {
     const res = await fetch('https://restcountries.com/v3.1/all')
 
     if (!res.ok) {
-      return new NextResponse('Failed to fetch countries', { status: 500 })
+      return NextResponse.json({ error: 'Failed to fetch countries' }, { status: 500 })
     }
 
     const countries = await res.json()
@@ -14,6 +13,6 @@ export async function GET() {
     return NextResponse.json(countries)
   } catch (error) {
     console.error('API error:', error)
-    return new NextResponse('Server error', { status: 500 })
+    return NextResponse.json({ error: 'Server error' }, { status: 500 })
   }
 }
