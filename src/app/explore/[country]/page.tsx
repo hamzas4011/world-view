@@ -42,7 +42,7 @@ export default async function Page({ params }: { params: { country: string } }) 
   const countryData = data?.[0]
 
   if (!countryData) {
-    console.error(`No data found for: ${country}`)
+    console.error(`No country data found for: ${country}`)
     return notFound()
   }
 
