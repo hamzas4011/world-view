@@ -34,7 +34,7 @@ export default async function Page(props: { params: Promise<{ country: string }>
   const countryData = data[0]
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-12">
+    <main className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
       <Link
         href="/explore"
         className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-medium shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition-all duration-150 mb-6 w-fit"
@@ -66,7 +66,7 @@ export default async function Page(props: { params: Promise<{ country: string }>
         />
       </div>
 
-      <div className="bg-white rounded-xl shadow-md p-6 grid gap-4 sm:grid-cols-2 text-gray-800">
+      <div className="bg-gray-50 rounded-xl shadow-md p-4 sm:p-6 grid gap-6 sm:grid-cols-2 text-gray-800">
         <Info title="Capital" value={countryData.capital?.join(', ')} />
         <Info title="Region" value={countryData.region} />
         <Info title="Subregion" value={countryData.subregion} />
