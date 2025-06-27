@@ -66,7 +66,7 @@ export default async function Page(props: { params: Promise<{ country: string }>
         />
       </div>
 
-      <div className="bg-gray-50 rounded-xl shadow-md p-4 sm:p-6 grid gap-6 sm:grid-cols-2 text-gray-800">
+      <div className="bg-slate-100 rounded-xl shadow-md p-4 sm:p-6 grid gap-6 sm:grid-cols-2 text-gray-800">
         <Info title="Capital" value={countryData.capital?.join(', ')} />
         <Info title="Region" value={countryData.region} />
         <Info title="Subregion" value={countryData.subregion} />
