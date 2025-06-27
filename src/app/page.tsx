@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-tr from-blue-50 to-white text-gray-800">
+    <main className="min-h-screen bg-gradient-to-tr from-blue-50 to-white text-gray-800 pb-24 sm:pb-0">
       {/* 🌍 Hero Section */}
       <section className="text-center px-4 sm:px-6 pt-20 pb-16">
         <div className="max-w-4xl mx-auto">
