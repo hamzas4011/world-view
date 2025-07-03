@@ -93,4 +93,4 @@ export default function NewsPage() {
       </section>
     </main>
   )
-}f
+}
