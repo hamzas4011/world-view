@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function HomePage() {
   return (
-    <div className="flex-1 flex flex-col">
+    <>
       {/* 🌍 Hero Section */}
       <section className="text-center px-4 pt-20 pb-16 bg-gradient-to-tr from-blue-50 to-white">
         <h1 className="text-4xl sm:text-5xl font-bold mb-4">🌍 Welcome to World View App</h1>
@@ -50,13 +50,13 @@ export default function HomePage() {
       </section>
 
       {/* 🧠 Why World View Section */}
-      <section className="bg-blue-50 px-6 pt-12 pb-12 text-center mt-auto">
+      <section className="bg-blue-50 px-6 pt-12 pb-12 text-center">
         <h2 className="text-2xl font-semibold mb-4">Why World View?</h2>
         <p className="text-gray-700 max-w-2xl mx-auto">
           World View is a simple, accessible, and beautiful way to learn more about the countries we share our planet with.
           Whether you are curious, researching, or learning — this is your global starting point.
         </p>
       </section>
-    </div>
+    </>
   );
 }
