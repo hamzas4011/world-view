@@ -1,11 +1,11 @@
-'use client';
-import Image from 'next/image';
+'use client'
+import Image from 'next/image'
 
 type Article = {
-  title: string;
-  pubDate: string;
-  image: string;
-};
+  title: string
+  pubDate: string
+  image: string
+}
 
 const mockArticles: Article[] = [
   {
@@ -53,33 +53,31 @@ const mockArticles: Article[] = [
     pubDate: '2025-04-26T13:20:00Z',
     image: '/images/train.jpg',
   },
-];
+]
 
 export default function NewsPage() {
   return (
     <main className="max-w-6xl mx-auto px-4 py-12">
-      <h1 className="text-3xl sm:text-4xl font-bold text-center mb-10">
-        📰 World News
-      </h1>
+      <h1 className="text-4xl font-bold text-center mb-10">📰 World News</h1>
 
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {mockArticles.map((article: Article, index) => (
           <article
             key={index}
             className="bg-white rounded-xl shadow hover:shadow-md transition overflow-hidden flex flex-col"
           >
-            <div className="relative w-full h-40 sm:h-48 md:h-52">
+            <div className="relative w-full h-48">
               <Image
                 src={article.image}
                 alt={article.title}
                 fill
                 className="object-cover"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                sizes="(max-width: 768px) 100vw, 33vw"
               />
             </div>
 
             <div className="p-4 flex flex-col flex-grow">
-              <p className="text-base sm:text-lg font-semibold text-blue-800">
+              <p className="text-lg font-semibold text-blue-800">
                 {article.title}
               </p>
               <p className="text-sm text-gray-500 mt-1">
@@ -94,5 +92,5 @@ export default function NewsPage() {
         ))}
       </section>
     </main>
-  );
-}
+  )
+}f
