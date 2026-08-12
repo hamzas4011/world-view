@@ -65,11 +65,17 @@ export default function ExplorePage() {
               key={index}
               className="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between"
             >
-              <img
-                src={country.flags.png}
-                alt={country.name}
-                className="w-full h-40 object-cover rounded"
-              />
+              <div className="w-full h-40 rounded bg-gray-100 flex items-center justify-center overflow-hidden">
+                {country.flags?.png ? (
+                  <img
+                    src={country.flags.png}
+                    alt={country.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-gray-400 text-sm">No flag available</span>
+                )}
+              </div>
               <h2 className="text-xl font-semibold mt-2">{country.name}</h2>
               <p className="text-sm text-gray-500">
                 Capital: {country.capital || 'N/A'}
