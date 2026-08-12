@@ -3,13 +3,13 @@ import { NextResponse } from 'next/server'
 export async function GET() {
   try {
     const res = await fetch(
-      'https://restcountries.com/v3.1/all?fields=name,flags,region,capital,subregion,population,area,languages,currencies,timezones',
+      'https://countries.dev/countries?fields=name,flags,region,capital,subregion,population,area,languages,currencies,timezones',
       { cache: 'no-store' }
     )
 
     if (!res.ok) {
       console.error('Failed to fetch countries:', res.status)
-      return NextResponse.json({ error: 'Failed to fetch countries' }, { status: 500 })
+      return NextResponse.json({ error: 'Failed to fetch countries' }, { status: 502 })
     }
 
     const countries = await res.json()
