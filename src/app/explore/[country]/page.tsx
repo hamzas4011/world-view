@@ -5,15 +5,15 @@ import Image from 'next/image'
 export const dynamicParams = true
 
 type CountryData = {
-  name: { common: string; official: string }
-  flags: { png: string; alt?: string }
-  capital?: string[]
+  name: string
+  flags: { png: string; svg: string }
+  capital?: string
   region: string
   subregion?: string
   population: number
   area: number
-  languages?: Record<string, string>
-  currencies?: Record<string, { name: string; symbol: string }>
+  languages?: { name: string }[]
+  currencies?: { name: string; symbol: string }[]
   timezones: string[]
 }
 
@@ -21,7 +21,7 @@ export default async function Page(props: { params: Promise<{ country: string }>
   const { country } = await props.params
 
   const res = await fetch(
-    `https://restcountries.com/v3.1/name/${encodeURIComponent(country)}?fullText=true`,
+    `https://countries.dev/name/${encodeURIComponent(country)}`,
     { cache: 'no-store' }
   )
 
@@ -32,6 +32,10 @@ export default async function Page(props: { params: Promise<{ country: string }>
 
   const data: CountryData[] = await res.json()
   const countryData = data[0]
+
+  if (!countryData) {
+    return notFound()
+  }
 
   return (
     <main className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
@@ -52,14 +56,13 @@ export default async function Page(props: { params: Promise<{ country: string }>
       </Link>
 
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-extrabold">{countryData.name.common}</h1>
-        <p className="text-gray-600 text-lg mt-2">{countryData.name.official}</p>
+        <h1 className="text-4xl font-extrabold">{countryData.name}</h1>
       </div>
 
       <div className="flex justify-center mb-10">
         <Image
           src={countryData.flags.png}
-          alt={countryData.flags.alt || `${countryData.name.common} flag`}
+          alt={`${countryData.name} flag`}
           width={400}
           height={250}
           className="w-full max-w-md rounded-xl border shadow-sm object-cover"
@@ -67,7 +70,7 @@ export default async function Page(props: { params: Promise<{ country: string }>
       </div>
 
       <div className="bg-slate-100 rounded-xl shadow-md p-4 sm:p-6 grid gap-6 sm:grid-cols-2 text-gray-800">
-        <Info title="Capital" value={countryData.capital?.join(', ')} />
+        <Info title="Capital" value={countryData.capital} />
         <Info title="Region" value={countryData.region} />
         <Info title="Subregion" value={countryData.subregion} />
         <Info title="Population" value={countryData.population.toLocaleString()} />
@@ -76,7 +79,7 @@ export default async function Page(props: { params: Promise<{ country: string }>
           title="Languages"
           value={
             countryData.languages
-              ? Object.values(countryData.languages).join(', ')
+              ? countryData.languages.map((l) => l.name).join(', ')
               : 'N/A'
           }
         />
@@ -84,9 +87,7 @@ export default async function Page(props: { params: Promise<{ country: string }>
           title="Currencies"
           value={
             countryData.currencies
-              ? Object.values(countryData.currencies)
-                  .map((c) => `${c.name} (${c.symbol})`)
-                  .join(', ')
+              ? countryData.currencies.map((c) => `${c.name} (${c.symbol})`).join(', ')
               : 'N/A'
           }
         />
