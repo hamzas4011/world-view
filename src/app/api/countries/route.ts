@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 export async function GET() {
   try {
     const res = await fetch(
-      'https://countries.dev/countries?fields=name,flags,region,capital,subregion,population,area,languages,currencies,timezones',
+      'https://countries.dev/countries?fields=name,alpha2Code,flags,region,capital,subregion,population,area,languages,currencies,timezones',
       { cache: 'no-store' }
     )
 

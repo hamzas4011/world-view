@@ -21,7 +21,7 @@ export default async function Page(props: { params: Promise<{ country: string }>
   const { country } = await props.params
 
   const res = await fetch(
-    `https://countries.dev/name/${encodeURIComponent(country)}`,
+    `https://countries.dev/alpha/${encodeURIComponent(country)}`,
     { cache: 'no-store' }
   )
 
@@ -30,8 +30,7 @@ export default async function Page(props: { params: Promise<{ country: string }>
     return notFound()
   }
 
-  const data: CountryData[] = await res.json()
-  const countryData = data[0]
+  const countryData: CountryData = await res.json()
 
   if (!countryData) {
     return notFound()
